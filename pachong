@@ -1,0 +1,20 @@
+import requests
+
+def count_articles(keyword):
+    url = f"https://www.google.com/search?q={keyword}"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36"
+    }
+
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+
+    # 解析搜索结果页面
+    search_results = response.text
+    count = search_results.count(keyword)
+
+    return count
+
+keyword = "王老吉"
+article_count = count_articles(keyword)
+print(f"全网中出现'{keyword}'这个词的文章数量为: {article_count}")
